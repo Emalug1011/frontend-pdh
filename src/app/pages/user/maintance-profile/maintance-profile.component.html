@@ -1,0 +1,270 @@
+<div class="row">
+  <div class="maintance">
+    <div class="col-md-12 buttoms">
+      <!-- Button trigger modal -->
+      <button class="btn btn-success float-right btn-md button-separate"> <i class="icofont icofont-file-excel"></i>
+        Descargar</button>
+      <button (click)="open(addProfile,0)" class="btn btn-primary float-right btn-md button-separate"><i
+          class="icofont icofont-plus-circle">
+        </i>Nuevo Perfil</button>
+    </div>
+
+    <div class="col-md-12 container-table">
+      <div class="">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Nombre</th>
+              <th>Descripción</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let profile of profiles">
+              <td>{{profile.code}}</td>
+              <td>{{profile.name}}</td>
+              <td>{{profile.description}}</td>
+              <td>
+                <div class="row">
+                  <div class="col">
+                    <div ngbDropdown class="d-inline-block">
+                      <button class="btn btn-outline-primary btn-mini" id="dropdownBasic1"
+                        ngbDropdownToggle>Acciones</button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button class="btn-mini" (click)="open(updateProfile,profile.code)"
+                          ngbDropdownItem>Actualizar</button>
+                        <button class="btn-mini" (click)="open(addPermit, profile.code)" ngbDropdownItem>Asignar
+                          herramientas</button>
+                        <button class="btn-mini" ngbDropdownItem>Eliminar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #addProfile let-c="close" let-d="dismiss">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h6 class="modal-title" id="modal-title-default">Administración de perfiles</h6>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Código:</label>
+              <input type="text" class="form-control" name="" id="">
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Nombre:</label>
+              <input type="text" class="form-control" name="" id="">
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">Estado:</label>
+              <select name="" id="" class="form-control">
+                <option value="">Seleccionar</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="">Descripcion:</label>
+              <textarea name="" id="" cols="30" rows="3" class="form-control"></textarea>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="errorState">
+          <span class="alert-inner--text">{{message.error}}</span>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="row">
+
+          <div class="col-md-6">
+            <button type="button" class="btn btn-danger" (click)="getDismissReason('Close click')">
+              Cancelar
+            </button>
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-info">Guardar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #updateProfile let-c="close" let-d="dismiss">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h6 class="modal-title" id="modal-title-default">Administración de usuarios</h6>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="row">
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="">Código:</label>
+              <input type="text" class="form-control" name="" id="">
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="">Nombre:</label>
+              <input type="text" class="form-control" name="" id="">
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="">Estado:</label>
+              <select name="" id="" class="form-control">
+                <option value="">Seleccionar</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">Descripcion:</label>
+              <textarea name="" id="" cols="30" rows="3" class="form-control"></textarea>
+            </div>
+          </div>
+
+
+
+
+        </div>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="errorState">
+          <span class="alert-inner--text">{{message.error}}</span>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="row">
+
+          <div class="col-md-6">
+            <button type="button" class="btn btn-danger" (click)="getDismissReason('Close click')">
+              Cancelar
+            </button>
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-info">Guardar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #addPermit let-c="close" let-d="dismiss">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h6 class="modal-title" id="modal-title-default">Administración de usuarios</h6>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="">Código:</label>
+              <input type="text" class="form-control" name="" id="">
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="">Nombre:</label>
+              <input type="text" class="form-control" name="" id="">
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="">Estado:</label>
+              <select name="" id="" class="form-control">
+                <option value="">Seleccionar</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-5" style="border: 1px solid; height: 150px;">
+            primera parte
+          </div>
+          <div class="col-md-2 position">
+            <button class="btn btn-success btn-mini btn-outline-success size"> > </button> <br>
+            <button class="btn btn-success btn-mini btn-outline-success size"> >> </button>
+            <br><br>
+            <button class="btn btn-success btn-mini btn-outline-success size">
+              << </button> <br>
+                <button class="btn btn-success btn-mini btn-outline-success size">
+                  < </button> <br>
+          </div>
+          <div class="col-md-5" style="border: 1px solid; height: 150px;">
+            primera parte
+          </div>
+        </div>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="errorState">
+          <span class="alert-inner--text">{{message.error}}</span>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="row">
+
+          <div class="col-md-6">
+            <button type="button" class="btn btn-danger" (click)="getDismissReason('Close click')">
+              Cancelar
+            </button>
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-info">Guardar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+
+    </div>
+  </div>
+</ng-template>
